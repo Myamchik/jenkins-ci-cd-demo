@@ -4,35 +4,24 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Сборка проекта...'
-                echo 'Имитация сборки завершена'
+                echo 'Сборка проекта (имитация)'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Запуск тестов...'
-                sh 'echo Тесты успешно пройдены'
+                echo 'Подготовка и запуск тестов'
+                sh 'chmod +x test.sh'
+                sh './test.sh'
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Развёртывание приложения...'
-                sh 'echo Деплой выполнен'
+                echo 'Подготовка и деплой'
+                sh 'chmod +x deploy.sh'
+                sh './deploy.sh staging'
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline завершён'
-        }
-        success {
-            echo 'Сборка прошла успешно'
-        }
-        failure {
-            echo 'Ошибка выполнения pipeline'
         }
     }
 }
